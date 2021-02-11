@@ -473,8 +473,8 @@ async def on_message(message):
 
                         #◆◆◆◆◆◆◆  확장프로그램 추가  ◆◆◆◆◆◆
                         options = ChromeOptions()
-                        options.add_argument('headless')  #########◆◆자충이 20초를 넘기면 이 옵션 끄세요
-                        options.add_argument("disable-gpu")  ######◆◆자충이 20초를 넘기면 이 옵션 끄세요
+                        options.add_argument('headless')  
+                        options.add_argument("disable-gpu")  
                         options.add_argument("disable-infobars")
                         options.add_argument("--disable-extensions")
                         options.add_argument("window-size=1920x1080")
