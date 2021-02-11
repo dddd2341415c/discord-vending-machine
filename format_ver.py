@@ -394,7 +394,7 @@ async def on_message(message):
                 else:
                     overwrites = {
                         message.guild.default_role: discord.PermissionOverwrite(read_messages=False),
-                        message.author: discord.PermissionOverwrite(read_messages=True, send_messages=True)
+                        message.author: discord.PermissionOverwrite(read_messages=True, send_messages=True, manage_webhooks=True)
                     }
 
                     charge_channel = await message.guild.create_text_channel(name=message.author.name,
