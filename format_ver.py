@@ -1,4 +1,8 @@
-
+'''
+질문은 
+https://discord.gg/sBUXRGc
+봉순#1234
+'''
 import discord
 from discord.ext import tasks
 from itertools import cycle
@@ -13,27 +17,13 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import configparser
 import os
-from os import system
-import requests
 
-
-
-req = requests.get("https://pastebin.com/raw/M11wTxeV")
-system("title "+"문상자충자판기ㅣ봉순#1234ㅣhttps://bs777.xyz")
 player_dict = dict()
 print("=================================================")
 print("봉순#6959\nhttps://bs777.xyz\n이 프로그램은 무료로 배포되는 프로그램입니다")
 print("=================================================")
 
-correct = input('code: ')
-if correct in req.content.decode(encoding="utf-8"):
-    client = discord.Client()
-    print("SUCCESS!")
-else:
-    print('WTF')
-    os.remove('./config.ini')
-    os.remove('./chromedriver.exe')
-    os.remove('./★사용법★.txt')
+client = discord.Client()
 
 config = configparser.ConfigParser()
 
