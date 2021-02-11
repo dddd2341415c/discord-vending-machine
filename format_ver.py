@@ -2,6 +2,7 @@
 질문은 
 https://discord.gg/sBUXRGc
 봉순#1234
+자판기 구분을 위해 필요 없는 부분들이 있으니 태클 자제좀요~😅
 '''
 import discord
 from discord.ext import tasks
