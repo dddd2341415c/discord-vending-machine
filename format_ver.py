@@ -673,7 +673,7 @@ async def on_message(message):
                                 fals.add_field(name='충전실패', value='**{0}**님이 충전을 실패하였습니다\n핀번호: `{1}`\n`{2}`'.format(message.author, allpin, chresult))
                                 await client.get_channel(chargelogchannel).send(embed=fals)
 
-                            if chresult == '이미 등록된 상품권' or chresult == '상품권 번호 불일치':
+                            if chresult == '이미 등록된 상품권' or chresult == '상품권 번호 불일치' or chresult == '판매 취소된 문화상품권':
                                 await message.channel.send('경고 1회가 부여되었습니다')
                                 cursor.execute('SELECT wrong_pin FROM main WHERE user_id = {0}'.format(message.author.id))
                                 count1 = cursor.fetchone()
