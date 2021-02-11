@@ -1,2 +1,2 @@
-# discord-vending-machine
-자판기 봇 소스
+- 2차 배포 금지 XX
+# 봉순#1234
