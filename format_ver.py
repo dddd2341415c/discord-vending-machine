@@ -2,9 +2,9 @@
 질문은 
 https://discord.gg/sBUXRGc
 봉순#1234
-자판기 구분을 위해 필요 없는 부분들이 있으니 태클 자제좀요~😅
 '''
 import discord
+
 from discord.ext import tasks
 from itertools import cycle
 import sqlite3
@@ -907,7 +907,7 @@ async def on_message(message):
             target.execute("SELECT * FROM main")
 
             with target:
-                with open('../감자탕 레시피/백업/dump.sql', 'w') as f:
+                with open('./백업/dump.sql', 'w') as f:
                     for line in target.iterdump():
                         f.write('%s\n' % line)
                     embed = discord.Embed(title='✅  유저 백업 성공', colour=discord.Colour.green())
