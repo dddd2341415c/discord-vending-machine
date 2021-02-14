@@ -875,11 +875,11 @@ async def on_message(message):
                     item = str(item)
                     item = item.replace("[", "").replace("]", "").replace("'", "").replace(",", "")
                     if not os.path.exists("./재고/{0}.txt".format(result)):
-                        itemtxt = open('./재고/{0}.txt'.format(result), 'w')
+                        itemtxt = open('./재고/{0}.txt'.format(result), 'w', encoding='utf-8')
                         itemtxt.write(item)
                         itemtxt.close()
                     else:
-                        itemtxt = open('./재고/{0}.txt'.format(result), 'a')
+                        itemtxt = open('./재고/{0}.txt'.format(result), 'a', encoding='utf-8')
                         itemtxt.write("\n{0}".format(item))
                         itemtxt.close()
 
