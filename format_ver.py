@@ -4,7 +4,6 @@ https://discord.gg/sBUXRGc
 봉순#1234
 '''
 import discord
-
 from discord.ext import tasks
 from itertools import cycle
 import sqlite3
@@ -883,7 +882,7 @@ async def on_message(message):
                         itemtxt.write("\n{0}".format(item))
                         itemtxt.close()
 
-                    itemtxt = open('./재고/{0}.txt'.format(result), 'r')
+                    itemtxt = open('./재고/{0}.txt'.format(result), 'r', encoding='utf-8')
                     jaego_amount = len(itemtxt.readlines())
 
                     embed = discord.Embed(title='✅ 재고 추가 성공', colour=discord.Colour.green())
