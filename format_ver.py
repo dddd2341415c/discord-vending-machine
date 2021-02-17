@@ -474,8 +474,6 @@ async def on_message(message):
                     PW = config['account']['PW']
                     start = time.time()
                     try:
-
-                        #◆◆◆◆◆◆◆  확장프로그램 추가  ◆◆◆◆◆◆
                         options = ChromeOptions()
                         options.add_argument('headless')  
                         options.add_argument("disable-gpu")  
