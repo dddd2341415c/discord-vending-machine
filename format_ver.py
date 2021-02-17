@@ -51,6 +51,7 @@ infochannel = config['account']['infochannel']
 listchannel = config['account']['listchannel']
 buychannel = config['account']['buychannel']
 customstatus = config['account']['status']
+guildid = config['account']['guildid']
 
 status = cycle(['!명령어', customstatus])
 
@@ -61,6 +62,7 @@ chargechannel = int(chargechannel)  # 충전신청 채널
 infochannel = int(infochannel)  # 정보 채널
 listchannel = int(listchannel)  # 제품목록 채널
 buychannel = int(buychannel)  # 구매 채널
+guildid = int(guildid)
 
 cantuse = discord.Embed(color=0xFF0000)
 cantuse.add_field(name='❌  명령어 사용불가 채널', value='해당 명령어는 이 채널에서 사용할 수 없습니다')
@@ -96,6 +98,8 @@ def is_not_pinned(mess):
 
 @client.event
 async def on_message(message):
+    if not message.guild.id == guildid:
+        return
     if message.content == '!도움' or message.content == '!도움말' or message.content == '!명령어':
         embed = discord.Embed(color=0x36393F)
         embed.add_field(name='명령어', value='가입\n충전신청\n내정보\n제품목록\n구매 [제품명] [개수]')
