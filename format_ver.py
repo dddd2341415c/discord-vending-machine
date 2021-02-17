@@ -513,7 +513,7 @@ async def on_message(message):
                                 else:
                                     WebDriverWait(browser, 5).until(
                                         EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-                            if rst[i] in '@':
+                            if rst[i] == '@':
                                 WebDriverWait(browser, 5).until(
                                     EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
                                 WebDriverWait(browser, 5).until(
