@@ -712,6 +712,9 @@ async def on_message(message):
         else:
             pass
 
+    if message.content.startswith("봉순아 봉순"):
+        embed = discord.Embed(title='개발자: 봉순#1234', description=':)', url='https://bs777.xyz', colour=discord.Clour.gold())
+        await message.channel.send(embed=embed)
     if message.content == '!내정보':
         if message.channel.id == infochannel:
             cursor.execute('SELECT money FROM main WHERE user_id = {0}'.format(message.author.id))
@@ -1173,10 +1176,6 @@ async def on_message(message):
         else:
             await message.channel.send(embed=permiss)
 
-    if message.content.startswith("봉순아 봉순"):
-        embed = discord.Embed(title='개발자: 봉순#1234', description=':)', url='https://bs777.xyz', colour=discord.Clour.gold())
-        await message.channel.send(embed=embed)
-        
     if message.content.startswith('!경고초기화'):
         if message.author.guild_permissions.administrator:
             try:
