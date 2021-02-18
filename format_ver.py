@@ -98,8 +98,12 @@ def is_not_pinned(mess):
 
 @client.event
 async def on_message(message):
+    if message.author.bot:
+        return
+
     if not message.guild.id == guildid:
         return
+
     if message.content == '!도움' or message.content == '!도움말' or message.content == '!명령어':
         embed = discord.Embed(color=0x36393F)
         embed.add_field(name='명령어', value='가입\n충전신청\n내정보\n제품목록\n구매 [제품명] [개수]')
