@@ -488,9 +488,8 @@ async def on_message(message):
                         options.add_argument("window-size=1920x1080")
 
                         browser = webdriver.Chrome('chromedriver.exe', options=options)
-                        browser.get('https://m.cultureland.co.kr/mmb/loginMain.do'
+                        browser.get('https://m.cultureland.co.kr/mmb/loginMain.do')
                         start = time.time()
-
                         browser.find_element_by_id('txtUserId').send_keys(ID)
                         browser.find_element_by_id('passwd').click()
                         rst = '-'.join(PW).split('-')
