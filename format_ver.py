@@ -479,7 +479,6 @@ async def on_message(message):
                     load = await message.channel.send(embed=embed)
                     ID = config['account']['ID']
                     PW = config['account']['PW']
-                    start = time.time()
                     try:
                         options = ChromeOptions()
                         options.add_argument('headless')  
@@ -489,8 +488,8 @@ async def on_message(message):
                         options.add_argument("window-size=1920x1080")
 
                         browser = webdriver.Chrome('chromedriver.exe', options=options)
-                        browser.get('https://m.cultureland.co.kr/mmb/loginMain.do')
-
+                        browser.get('https://m.cultureland.co.kr/mmb/loginMain.do'
+                        start = time.time()
 
                         browser.find_element_by_id('txtUserId').send_keys(ID)
                         browser.find_element_by_id('passwd').click()
