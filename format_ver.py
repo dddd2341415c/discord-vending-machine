@@ -98,6 +98,10 @@ def is_not_pinned(mess):
 
 @client.event
 async def on_message(message):
+    blacklist = ['.', '/', '\']
+    if blacklist in message.content:
+        return
+                 
     if message.author.bot:
         return
 
