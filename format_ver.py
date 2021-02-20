@@ -1050,6 +1050,12 @@ async def on_message(message):
                 
                 itemtxt.close()
                 
+                mns_money = int(lmoney) - int(lselitem_price)
+                sql = 'UPDATE main SET money = ? WHERE user_id = {0}'.format(message.author.id)
+                val = (str(mns_money),)
+                cursor.execute(sql, val)
+                db.commit()
+                
                 with open('./재고/{0}.txt'.format(item), "r") as infile:
                     f = open('./재고/{0}.txt'.format(item))
                     for i in range(ia):
@@ -1063,12 +1069,6 @@ async def on_message(message):
 
                     with open('./재고/{0}.txt'.format(item), 'w') as f:
                         f.writelines(data)
-
-                mns_money = int(lmoney) - int(lselitem_price)
-                sql = 'UPDATE main SET money = ? WHERE user_id = {0}'.format(message.author.id)
-                val = (str(mns_money),)
-                cursor.execute(sql, val)
-                db.commit()
 
                 embed = discord.Embed(colour=discord.Colour.green())
                 embed.add_field(name='✅  구매성공', value='상품을 DM으로 전송하였습니다')
