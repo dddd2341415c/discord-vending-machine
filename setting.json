@@ -1,0 +1,14 @@
+{
+	"ID": "컬쳐랜드 아이디",
+	"PW": "컬쳐랜드 비밀번호",
+	"token": "봇 토큰",
+	"customstatus": "~하는중",
+	"guildid": "서버 ID",
+	"buylogchannel": "구매로그 채널ID",
+	"chargelogchannel": "충전로그 채널ID",
+	"regichannel": "가입 채널ID",
+	"chargechannel": "충전신청 채널ID",
+	"infochannel": "내정보 채널ID",
+	"listchannel": "제품목록 채널ID",
+	"buychannel": "구매 채널ID"
+}
