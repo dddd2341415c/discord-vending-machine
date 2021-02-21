@@ -18,6 +18,8 @@ import asyncio
 import configparser
 import os
 import json
+import string
+import random
 
 player_dict = dict()
 print("=================================================")
@@ -1147,19 +1149,29 @@ async def on_message(message):
                     val = (str(mns_money),)
                     cursor.execute(sql, val)
 
+                    content = ""
                     with open('./재고/{0}.txt'.format(item), "r", encoding='utf-8') as infile:
                         f = open('./재고/{0}.txt'.format(item), encoding='utf-8')
                         for i in range(ia):
-                            line = f.readline()
-                            await message.author.send(line)
+                            content += f.readline() + "\n" 
+                    try:
+                        if len(content) > 2000:
+                            filename = "./" + ''.join(random.choice(string.ascii_uppercase + string.digits) for i in range(16)) + ".txt"
+                            f = open(filename, "w", encoding="utf-8")
+                            f.write(content)
+                            f.close()
+                            await message.author.send(file=discord.File(filename))
+                            os.remove(filename)
+                        else:
+                            await message.author.send(content)
+                    except:
+                        embed = discord.Embed(title='❌  오류', description='디엠 발송이 차단되어 있는지 확인해주세요'.format(nmo), colour=0xFF0000)
+                        await message.channel.send(embed=embed)
+                        return
+                    db.commit()
                 except:
-                    embed = discord.Embed(title='❌  오류', description='디엠 발송이 차단되어 있는지 확인해주세요'.format(nmo),
-                                          colour=0xFF0000)
-                    await message.channel.send(embed=embed)
-                    return
-                db.commit()
-
-
+                    print("??")
+                   
                 for i in range(ia):
                     with open('./재고/{0}.txt'.format(item), encoding='utf-8') as f:
                         data = f.readlines()
