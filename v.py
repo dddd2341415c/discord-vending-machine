@@ -15,7 +15,6 @@ import discord
 import sqlite3
 import datetime
 import asyncio
-import time
 import configparser
 import os
 import json
