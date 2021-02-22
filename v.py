@@ -144,7 +144,7 @@ async def on_message(message):
                     data['buychannel'] = message.channel.id
                     name = '구매채널'
 
-                with open('./setting.json', 'w', encoding='utf-8') as making:
+                with open('./setting.json', 'w', encoding='uft-8-sig') as making:
                     json.dump(data, making, indent="\t")
 
                 await message.channel.send(embed=discord.Embed(title=f'{name}채널 수정됨', description=f'{message.channel.mention}', colour=discord.Colour.green()))
