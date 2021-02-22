@@ -26,7 +26,7 @@ print("=================================================")
 print("봉순#1234\nhttps://bs777.xyz\n이 프로그램은 무료로 배포되는 프로그램입니다")
 print("=================================================")
 
-with open('./setting.json', 'r', encoding='utf-8') as boo:
+with open('./setting.json', 'r', encoding='uft-8-sig') as boo:
     data = json.load(boo)
 
 token = data['token']
