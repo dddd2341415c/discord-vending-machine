@@ -756,7 +756,7 @@ async def on_message(message):
                                 n_money = result2.replace('(', '').replace(')', '').replace(',', '').replace("'", "")
 
                                 embed = discord.Embed(colour=discord.Colour.green())
-                                embed.add_field(name='충전 성공', value='충전금액: {0}\n소요시간: {1}초'.format(charge_money, stime), inline=False)
+                                embed.add_field(name='충전 성공', value='충전금액: {0}'.format(charge_money), inline=False)
                                 embed.add_field(name='잔액', value=str(n_money) + '코인', inline=False)
                                 print("요청자: {0}, 결과: {1}, 핀번호: {2}, 금액: {3}".format(message.author, chresult, allpin, charge_money))
                                 succ = discord.Embed(colour=discord.Colour.green())
@@ -765,7 +765,7 @@ async def on_message(message):
 
                             else:
                                 embed = discord.Embed(color=0xFF0000)
-                                embed.add_field(name='충전 실패', value="{0}\n소요시간: {1}초".format(chresult, stime))
+                                embed.add_field(name='충전 실패', value="{0}".format(chresult))
                                 print("요청자: {0}, 결과: {1}, 핀번호: {2}".format(message.author, chresult, allpin))
                                 fals = discord.Embed(color=0xFF0000)
                                 fals.add_field(name='충전실패', value='**{0}**님이 충전을 실패하였습니다\n핀번호: `{1}`\n`{2}`'.format(message.author, allpin, chresult))
