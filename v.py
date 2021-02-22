@@ -89,7 +89,7 @@ def is_not_pinned(mess):
 
 @client.event
 async def on_message(message):
-    with open('./setting.json', 'r', encoding='utf-8') as boo:
+    with open('./setting.json', 'r', encoding='uft-8-sig') as boo:
         data1 = json.load(boo)
     buylogchannel = data1['buylogchannel']
     chargelogchannel = data1['chargelogchannel']
@@ -119,7 +119,7 @@ async def on_message(message):
     if message.content == '!가입채널' or message.content == '!구매로그채널' or message.content == '!충전로그채널' or message.content == '!충전신청채널' or message.content == '!충전채널' or message.content == '!내정보채널' or message.content == '!정보채널' or message.content == '!제품목록채널' or message.content == '!구매채널' or message.content == '!구입채널':
         if message.author.guild_permissions.administrator:
             try:
-                with open('./setting.json', 'r', encoding='utf-8') as boo:
+                with open('./setting.json', 'r', encoding='uft-8-sig') as boo:
                     data = json.load(boo)
 
                 if message.content == '!가입채널': #
@@ -157,7 +157,7 @@ async def on_message(message):
 
     if message.content == '!채널설정값':
         if message.author.guild_permissions.administrator:
-            with open('./setting.json', 'r', encoding='utf-8') as boo:
+            with open('./setting.json', 'r', encoding='uft-8-sig') as boo:
                         data = json.load(boo)
             chrlog = data['chargelogchannel']
             bylog = data['buylogchannel']
