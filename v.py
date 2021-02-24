@@ -26,8 +26,12 @@ print("=================================================")
 print("봉순#1234\nhttps://bs777.xyz\n이 프로그램은 무료로 배포되는 프로그램입니다")
 print("=================================================")
 
-with open('./setting.json', 'r', encoding='uft-8-sig') as boo:
-    data = json.load(boo)
+try:
+    with open('./setting.json', 'r', encoding='uft-8-sig') as boo:
+        data = json.load(boo)
+except:
+    with open('./setting.json', 'r', encoding='uft-8') as boo:
+        data = json.load(boo)
 
 token = data['token']
 customstatus = data['customstatus']
@@ -89,8 +93,12 @@ def is_not_pinned(mess):
 
 @client.event
 async def on_message(message):
-    with open('./setting.json', 'r', encoding='uft-8-sig') as boo:
-        data1 = json.load(boo)
+    try:
+        with open('./setting.json', 'r', encoding='uft-8-sig') as boo:
+            data1 = json.load(boo)
+    except:
+        with open('./setting.json', 'r', encoding='uft-8') as boo:
+            data1 = json.load(boo)
     buylogchannel = data1['buylogchannel']
     chargelogchannel = data1['chargelogchannel']
     regichannel = data1['regichannel']
@@ -119,8 +127,12 @@ async def on_message(message):
     if message.content == '!가입채널' or message.content == '!구매로그채널' or message.content == '!충전로그채널' or message.content == '!충전신청채널' or message.content == '!충전채널' or message.content == '!내정보채널' or message.content == '!정보채널' or message.content == '!제품목록채널' or message.content == '!구매채널' or message.content == '!구입채널':
         if message.author.guild_permissions.administrator:
             try:
-                with open('./setting.json', 'r', encoding='uft-8-sig') as boo:
-                    data = json.load(boo)
+                try:
+                    with open('./setting.json', 'r', encoding='uft-8-sig') as boo:
+                        data = json.load(boo)
+                except:
+                    with open('./setting.json', 'r', encoding='uft-8') as boo:
+                        data = json.load(boo)
 
                 if message.content == '!가입채널': #
                     data['regichannel'] = message.channel.id 
@@ -143,10 +155,13 @@ async def on_message(message):
                 if message.content == '!구입채널' or message.content == '!구매채널': #
                     data['buychannel'] = message.channel.id
                     name = '구매채널'
-
-                with open('./setting.json', 'w', encoding='uft-8-sig') as making:
-                    json.dump(data, making, indent="\t")
-
+                try:
+                    with open('./setting.json', 'w', encoding='uft-8-sig') as making:
+                        json.dump(data, making, indent="\t")
+                except:
+                    with open('./setting.json', 'w', encoding='uft-8') as making:
+                        json.dump(data, making, indent="\t")
+                        
                 await message.channel.send(embed=discord.Embed(title=f'{name}채널 수정됨', description=f'{message.channel.mention}', colour=discord.Colour.green()))
             except:
                 embed = discord.Embed(title='❌  오류', description='예끼치 않은 오류가 발생하였습니다', colour=0xFF0000)
@@ -157,8 +172,12 @@ async def on_message(message):
 
     if message.content == '!채널설정값':
         if message.author.guild_permissions.administrator:
-            with open('./setting.json', 'r', encoding='uft-8-sig') as boo:
-                        data = json.load(boo)
+            try:
+                with open('./setting.json', 'r', encoding='uft-8-sig') as boo:
+                    data = json.load(boo)
+            except:
+                with open('./setting.json', 'w', encoding='uft-8') as making:
+                    data = json.load(boo)
             chrlog = data['chargelogchannel']
             bylog = data['buylogchannel']
             r = data['regichannel']
