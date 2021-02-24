@@ -27,10 +27,10 @@ print("봉순#1234\nhttps://bs777.xyz\n이 프로그램은 무료로 배포되�
 print("=================================================")
 
 try:
-    with open('./setting.json', 'r', encoding='uft-8-sig') as boo:
+    with open('./setting.json', 'r', encoding='utf-8-sig') as boo:
         data = json.load(boo)
 except:
-    with open('./setting.json', 'r', encoding='uft-8') as boo:
+    with open('./setting.json', 'r', encoding='utf-8') as boo:
         data = json.load(boo)
 
 token = data['token']
@@ -94,10 +94,10 @@ def is_not_pinned(mess):
 @client.event
 async def on_message(message):
     try:
-        with open('./setting.json', 'r', encoding='uft-8-sig') as boo:
+        with open('./setting.json', 'r', encoding='utf-8-sig') as boo:
             data1 = json.load(boo)
     except:
-        with open('./setting.json', 'r', encoding='uft-8') as boo:
+        with open('./setting.json', 'r', encoding='utf-8') as boo:
             data1 = json.load(boo)
     buylogchannel = data1['buylogchannel']
     chargelogchannel = data1['chargelogchannel']
@@ -128,10 +128,10 @@ async def on_message(message):
         if message.author.guild_permissions.administrator:
             try:
                 try:
-                    with open('./setting.json', 'r', encoding='uft-8-sig') as boo:
+                    with open('./setting.json', 'r', encoding='utf-8-sig') as boo:
                         data = json.load(boo)
                 except:
-                    with open('./setting.json', 'r', encoding='uft-8') as boo:
+                    with open('./setting.json', 'r', encoding='utf-8') as boo:
                         data = json.load(boo)
 
                 if message.content == '!가입채널': #
@@ -156,10 +156,10 @@ async def on_message(message):
                     data['buychannel'] = message.channel.id
                     name = '구매채널'
                 try:
-                    with open('./setting.json', 'w', encoding='uft-8-sig') as making:
+                    with open('./setting.json', 'w', encoding='utf-8-sig') as making:
                         json.dump(data, making, indent="\t")
                 except:
-                    with open('./setting.json', 'w', encoding='uft-8') as making:
+                    with open('./setting.json', 'w', encoding='utf-8') as making:
                         json.dump(data, making, indent="\t")
                         
                 await message.channel.send(embed=discord.Embed(title=f'{name}채널 수정됨', description=f'{message.channel.mention}', colour=discord.Colour.green()))
@@ -173,10 +173,10 @@ async def on_message(message):
     if message.content == '!채널설정값':
         if message.author.guild_permissions.administrator:
             try:
-                with open('./setting.json', 'r', encoding='uft-8-sig') as boo:
+                with open('./setting.json', 'r', encoding='utf-8-sig') as boo:
                     data = json.load(boo)
             except:
-                with open('./setting.json', 'w', encoding='uft-8') as making:
+                with open('./setting.json', 'w', encoding='utf-8') as making:
                     data = json.load(boo)
             chrlog = data['chargelogchannel']
             bylog = data['buylogchannel']
