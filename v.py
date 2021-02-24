@@ -532,8 +532,12 @@ async def on_message(message):
             await message.channel.send(embed=cantuse)
 
     if message.content.startswith('!자충'):
-        with open('./setting.json', 'r', encoding='utf-8') as boo:
-            get = json.load(boo)
+        try:
+            with open('./setting.json', 'r', encoding='utf-8') as boo:
+                get = json.load(boo)
+        except:
+            with open('./setting.json', 'r', encoding='utf-8-sig') as boo:
+                get = json.load(boo)
         overwrite = message.channel.overwrites_for(message.author)
         if overwrite.manage_webhooks:
             cursor.execute('SELECT wrong_pin FROM main WHERE user_id = {0}'.format(message.author.id))
