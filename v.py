@@ -831,7 +831,7 @@ async def on_message(message):
     if message.content.startswith("봉순아 봉순"):
         embed = discord.Embed(title='개발자: 봉순#1234', description=':)', url='https://bs777.xyz', colour=discord.Clour.gold())
         await message.channel.send(embed=embed)
-    if message.content == '!내정보':
+    if message.content == '!내정보' and not message.content == '!내정보채널':
         if message.channel.id == infochannel:
             cursor.execute('SELECT money FROM main WHERE user_id = {0}'.format(message.author.id))
             money1 = cursor.fetchone()
@@ -881,7 +881,7 @@ async def on_message(message):
         else:
             await message.channel.send(embed=cantuse)
 
-    if message.content.startswith('!정보'):
+    if message.content.startswith('!정보') and not message.content == '!정보채널':
         if message.author.guild_permissions.administrator:
             try:
                 author = message.mentions[0]
