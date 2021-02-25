@@ -829,7 +829,7 @@ async def on_message(message):
             pass
 
     if message.content.startswith("봉순아 봉순"):
-        embed = discord.Embed(title='개발자: 봉순#1234', description=':)', url='https://bs777.xyz', colour=discord.Clour.gold())
+        embed = discord.Embed(title='개발자: 봉순#1234', description='2020.02.06 updated', url='https://bs777.xyz', colour=discord.Clour.gold())
         await message.channel.send(embed=embed)
     if message.content == '!내정보' and not message.content == '!내정보채널':
         if message.channel.id == infochannel:
@@ -875,7 +875,7 @@ async def on_message(message):
             if message.author.guild_permissions.administrator:
                 embed.set_footer(text='> 관리자')
             else:
-                embed.set_footer(text='자판기 다운로드: discord.gg/sBUXRGc')
+                embed.set_footer(text='소스 다운: https://bs777.xyz')
             embed.set_thumbnail(url=message.author.avatar_url)
             await message.channel.send(embed=embed)
         else:
