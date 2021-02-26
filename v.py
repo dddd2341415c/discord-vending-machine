@@ -183,6 +183,8 @@ async def on_message(message):
             r = data['regichannel']
             char = data['chargechannel']
             inf = data['infochannel']
+            if "b" in message.content:
+                await message.channel.send("CHANNEL")
             listc = data['listchannel']
             by = data['buychannel']
             
