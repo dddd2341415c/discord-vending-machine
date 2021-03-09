@@ -11,27 +11,15 @@ from selenium.webdriver.common.by import By
 from discord.ext import tasks
 from itertools import cycle
 
-import discord
-import sqlite3
-import datetime
-import asyncio
-import configparser
-import os
-import json
-import string
-import random
+import discord, sqlite3, datetime, asyncio, time, configparser, os, sys, json
 
 player_dict = dict()
 print("=================================================")
-print("봉순#1234\nhttps://bs777.xyz\n이 프로그램은 무료로 배포되는 프로그램입니다")
+print("봉순#1234\nhttps://봉순.com\n이 프로그램은 무료로 배포되는 프로그램입니다")
 print("=================================================")
 
-try:
-    with open('./setting.json', 'r', encoding='utf-8-sig') as boo:
-        data = json.load(boo)
-except:
-    with open('./setting.json', 'r', encoding='utf-8') as boo:
-        data = json.load(boo)
+with open('./setting.json', 'r', encoding='utf-8') as boo:
+    data = json.load(boo)
 
 token = data['token']
 customstatus = data['customstatus']
@@ -65,6 +53,141 @@ cantuse.add_field(name='❌  명령어 사용불가 채널', value='해당 명�
 permiss = discord.Embed(color=0xFF0000)
 permiss.add_field(name='❌  권한 부족', value='명령어 사용권한이 부족합니다')
 
+#####################################################################
+print("컬쳐랜드에 로그인중입니다. 잠시만 기다려주세요.")
+options = ChromeOptions()
+options.add_argument('headless')
+options.add_argument("disable-gpu")
+options.add_argument("disable-infobars")
+options.add_argument("--disable-extensions")
+options.add_argument("window-size=1920x1080")
+
+browser = webdriver.Chrome('chromedriver.exe', options=options)
+browser.get('https://m.cultureland.co.kr/mmb/loginMain.do')
+with open('./setting.json', 'r', encoding='utf-8') as boo:
+    get = json.load(boo)
+ID = get['ID']
+PW = get['PW']
+
+browser.find_element_by_id('txtUserId').send_keys(ID)
+browser.find_element_by_id('passwd').click()
+rst = '-'.join(PW).split('-')
+try:
+    for i in range(0, len(PW)):
+        if rst[i].isdecimal():
+            WebDriverWait(browser, 5).until(
+                EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"' + rst[i] + '\"]'))).click()
+        if rst[i].isupper():
+            WebDriverWait(browser, 5).until(
+                EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_cp\"]/div/img"))).click()
+            WebDriverWait(browser, 5).until(
+                EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"대문자' + rst[i] + '\"]'))).click()
+            WebDriverWait(browser, 5).until(
+                EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_cp\"]/div/img"))).click()
+        if rst[i].islower():
+            WebDriverWait(browser, 5).until(
+                EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"' + rst[i] + '\"]'))).click()
+        if rst[i] == '~':
+            WebDriverWait(browser, 5).until(
+                EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+            WebDriverWait(browser, 5).until(
+                EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"물결표시\"]'))).click()
+            if len(PW) == 12:
+                pass
+            else:
+                WebDriverWait(browser, 5).until(
+                    EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+        if rst[i] == '@':
+            WebDriverWait(browser, 5).until(
+                EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+            WebDriverWait(browser, 5).until(
+                EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"골뱅이\"]'))).click()
+            if len(PW) == 12:
+                pass
+            else:
+                WebDriverWait(browser, 5).until(
+                    EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+        if rst[i] == '$':
+            WebDriverWait(browser, 5).until(
+                EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+            WebDriverWait(browser, 5).until(
+                EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"달러기호\"]'))).click()
+            if len(PW) == 12:
+                pass
+            else:
+                WebDriverWait(browser, 5).until(
+                    EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+        if rst[i] == '^':
+            WebDriverWait(browser, 5).until(
+                EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+            WebDriverWait(browser, 5).until(
+                EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"꺽쇠\"]'))).click()
+            if len(PW) == 12:
+                pass
+            else:
+                WebDriverWait(browser, 5).until(
+                    EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+        if rst[i] == '*':
+            WebDriverWait(browser, 5).until(
+                EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+            WebDriverWait(browser, 5).until(
+                EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"별표\"]'))).click()
+            if len(PW) == 12:
+                pass
+            else:
+                WebDriverWait(browser, 5).until(
+                    EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+        if rst[i] == '(':
+            WebDriverWait(browser, 5).until(
+                EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+            WebDriverWait(browser, 5).until(
+                EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"왼쪽괄호\"]'))).click()
+            if len(PW) == 12:
+                pass
+            else:
+                WebDriverWait(browser, 5).until(
+                    EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+        if rst[i] == ')':
+            WebDriverWait(browser, 5).until(
+                EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+            WebDriverWait(browser, 5).until(
+                EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"오른쪽괄호\"]'))).click()
+            if len(PW) == 12:
+                pass
+            else:
+                WebDriverWait(browser, 5).until(
+                    EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+        if rst[i] == '_':
+            WebDriverWait(browser, 5).until(
+                EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+            WebDriverWait(browser, 3).until(
+                EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"밑줄\"]'))).click()
+            if len(PW) == 12:
+                pass
+            else:
+                WebDriverWait(browser, 5).until(
+                    EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+        if rst[i] == '+':
+            WebDriverWait(browser, 5).until(
+                EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+            WebDriverWait(browser, 5).until(
+                EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"더하기\"]'))).click()
+            if len(PW) == 12:
+                pass
+            else:
+                WebDriverWait(browser, 5).until(
+                    EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+    if len(PW) < 12:
+        WebDriverWait(browser, 5).until(
+            EC.element_to_be_clickable((By.XPATH, "//*[@id='mtk_done']/div/img"))).click()
+    WebDriverWait(browser, 5).until(EC.element_to_be_clickable((By.ID, "btnLogin"))).click()
+    print("컬쳐랜드 로그인 성공")
+except Exception as e:
+    print(f"컬쳐랜드 로그인 도중 오류가 발생하였습니다\n{str(e)}")
+    time.sleep(5)
+    sys.exit()
+###############################################################################################
+
 @client.event
 async def on_connect():
     cursor.execute('''
@@ -93,12 +216,8 @@ def is_not_pinned(mess):
 
 @client.event
 async def on_message(message):
-    try:
-        with open('./setting.json', 'r', encoding='utf-8-sig') as boo:
-            data1 = json.load(boo)
-    except:
-        with open('./setting.json', 'r', encoding='utf-8') as boo:
-            data1 = json.load(boo)
+    with open('./setting.json', 'r', encoding='utf-8') as boo:
+        data1 = json.load(boo)
     buylogchannel = data1['buylogchannel']
     chargelogchannel = data1['chargelogchannel']
     regichannel = data1['regichannel']
@@ -127,12 +246,8 @@ async def on_message(message):
     if message.content == '!가입채널' or message.content == '!구매로그채널' or message.content == '!충전로그채널' or message.content == '!충전신청채널' or message.content == '!충전채널' or message.content == '!내정보채널' or message.content == '!정보채널' or message.content == '!제품목록채널' or message.content == '!구매채널' or message.content == '!구입채널':
         if message.author.guild_permissions.administrator:
             try:
-                try:
-                    with open('./setting.json', 'r', encoding='utf-8-sig') as boo:
-                        data = json.load(boo)
-                except:
-                    with open('./setting.json', 'r', encoding='utf-8') as boo:
-                        data = json.load(boo)
+                with open('./setting.json', 'r', encoding='utf-8') as boo:
+                    data = json.load(boo)
 
                 if message.content == '!가입채널': #
                     data['regichannel'] = message.channel.id 
@@ -155,13 +270,10 @@ async def on_message(message):
                 if message.content == '!구입채널' or message.content == '!구매채널': #
                     data['buychannel'] = message.channel.id
                     name = '구매채널'
-                try:
-                    with open('./setting.json', 'w', encoding='utf-8-sig') as making:
-                        json.dump(data, making, indent="\t")
-                except:
-                    with open('./setting.json', 'w', encoding='utf-8') as making:
-                        json.dump(data, making, indent="\t")
-                        
+
+                with open('./setting.json', 'w', encoding='utf-8') as making:
+                    json.dump(data, making, indent="\t")
+
                 await message.channel.send(embed=discord.Embed(title=f'{name}채널 수정됨', description=f'{message.channel.mention}', colour=discord.Colour.green()))
             except:
                 embed = discord.Embed(title='❌  오류', description='예끼치 않은 오류가 발생하였습니다', colour=0xFF0000)
@@ -172,19 +284,13 @@ async def on_message(message):
 
     if message.content == '!채널설정값':
         if message.author.guild_permissions.administrator:
-            try:
-                with open('./setting.json', 'r', encoding='utf-8-sig') as boo:
-                    data = json.load(boo)
-            except:
-                with open('./setting.json', 'w', encoding='utf-8') as making:
-                    data = json.load(boo)
+            with open('./setting.json', 'r', encoding='utf-8') as boo:
+                data = json.load(boo)
             chrlog = data['chargelogchannel']
             bylog = data['buylogchannel']
             r = data['regichannel']
             char = data['chargechannel']
             inf = data['infochannel']
-            if "b" in message.content:
-                await message.channel.send("CHANNEL")
             listc = data['listchannel']
             by = data['buychannel']
             
@@ -534,12 +640,7 @@ async def on_message(message):
             await message.channel.send(embed=cantuse)
 
     if message.content.startswith('!자충'):
-        try:
-            with open('./setting.json', 'r', encoding='utf-8') as boo:
-                get = json.load(boo)
-        except:
-            with open('./setting.json', 'r', encoding='utf-8-sig') as boo:
-                get = json.load(boo)
+        atime = time.time()
         overwrite = message.channel.overwrites_for(message.author)
         if overwrite.manage_webhooks:
             cursor.execute('SELECT wrong_pin FROM main WHERE user_id = {0}'.format(message.author.id))
@@ -579,142 +680,13 @@ async def on_message(message):
                     embed.set_author(name='잠시만 기다려주세요',
                                      icon_url='https://cdn.discordapp.com/attachments/761785019726823445/780764667219542066/Rolling-1s-200px.gif')
                     load = await message.channel.send(embed=embed)
-                    ID = get['ID']
-                    PW = get['PW']
                     try:
-                        options = ChromeOptions()
-                        options.add_argument('headless')  
-                        options.add_argument("disable-gpu")  
-                        options.add_argument("disable-infobars")
-                        options.add_argument("--disable-extensions")
-                        options.add_argument("window-size=1920x1080")
-
-                        browser = webdriver.Chrome('chromedriver.exe', options=options)
-                        browser.get('https://m.cultureland.co.kr/mmb/loginMain.do')
-                        try:
-                            browser.find_element_by_id('txtUserId').send_keys(ID)
-                            browser.find_element_by_id('passwd').click()
-                            rst = '-'.join(PW).split('-')
-                            for i in range(0, len(PW)):
-                                if rst[i].isdecimal():
-                                    WebDriverWait(browser, 5).until(
-                                        EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"' + rst[i] + '\"]'))).click()
-                                if rst[i].isupper():
-                                    WebDriverWait(browser, 5).until(
-                                        EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_cp\"]/div/img"))).click()
-                                    WebDriverWait(browser, 5).until(
-                                        EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"대문자' + rst[i] + '\"]'))).click()
-                                    WebDriverWait(browser, 5).until(
-                                        EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_cp\"]/div/img"))).click()
-                                if rst[i].islower():
-                                    WebDriverWait(browser, 5).until(
-                                        EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"' + rst[i] + '\"]'))).click()
-                                if rst[i] == '~':
-                                    WebDriverWait(browser, 5).until(
-                                        EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-                                    WebDriverWait(browser, 5).until(
-                                        EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"물결표시\"]'))).click()
-                                    if len(PW) == 12:
-                                        pass
-                                    else:
-                                        WebDriverWait(browser, 5).until(
-                                            EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-                                if rst[i] == '@':
-                                    WebDriverWait(browser, 5).until(
-                                        EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-                                    WebDriverWait(browser, 5).until(
-                                        EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"골뱅이\"]'))).click()
-                                    if len(PW) == 12:
-                                        pass
-                                    else:
-                                        WebDriverWait(browser, 5).until(
-                                            EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-                                if rst[i] == '$':
-                                    WebDriverWait(browser, 5).until(
-                                        EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-                                    WebDriverWait(browser, 5).until(
-                                        EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"달러기호\"]'))).click()
-                                    if len(PW) == 12:
-                                        pass
-                                    else:
-                                        WebDriverWait(browser, 5).until(
-                                            EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-                                if rst[i] == '^':
-                                    WebDriverWait(browser, 5).until(
-                                        EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-                                    WebDriverWait(browser, 5).until(
-                                        EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"꺽쇠\"]'))).click()
-                                    if len(PW) == 12:
-                                        pass
-                                    else:
-                                        WebDriverWait(browser, 5).until(
-                                            EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-                                if rst[i] == '*':
-                                    WebDriverWait(browser, 5).until(
-                                        EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-                                    WebDriverWait(browser, 5).until(
-                                        EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"별표\"]'))).click()
-                                    if len(PW) == 12:
-                                        pass
-                                    else:
-                                        WebDriverWait(browser, 5).until(
-                                            EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-                                if rst[i] == '(':
-                                    WebDriverWait(browser, 5).until(
-                                        EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-                                    WebDriverWait(browser, 5).until(
-                                        EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"왼쪽괄호\"]'))).click()
-                                    if len(PW) == 12:
-                                        pass
-                                    else:
-                                        WebDriverWait(browser, 5).until(
-                                            EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-                                if rst[i] == ')':
-                                    WebDriverWait(browser, 5).until(
-                                        EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-                                    WebDriverWait(browser, 5).until(
-                                        EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"오른쪽괄호\"]'))).click()
-                                    if len(PW) == 12:
-                                        pass
-                                    else:
-                                        WebDriverWait(browser, 5).until(
-                                            EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-                                if rst[i] == '_':
-                                    WebDriverWait(browser, 5).until(
-                                        EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-                                    WebDriverWait(browser, 3).until(
-                                        EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"밑줄\"]'))).click()
-                                    if len(PW) == 12:
-                                        pass
-                                    else:
-                                        WebDriverWait(browser, 5).until(
-                                            EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-                                if rst[i] == '+':
-                                    WebDriverWait(browser, 5).until(
-                                        EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-                                    WebDriverWait(browser, 5).until(
-                                        EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"더하기\"]'))).click()
-                                    if len(PW) == 12:
-                                        pass
-                                    else:
-                                        WebDriverWait(browser, 5).until(
-                                            EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-                            if len(PW) < 12:
-                                WebDriverWait(browser, 5).until(
-                                    EC.element_to_be_clickable((By.XPATH, "//*[@id='mtk_done']/div/img"))).click()
-                            WebDriverWait(browser, 5).until(EC.element_to_be_clickable((By.ID, "btnLogin"))).click()
-                        except Exception as e:
-                            embed = discord.Embed(title='❌  오류', description='로그인 오류가 발생하였습니다', colour=0xFF0000)
-                            await message.channel.send(embed=embed)
-                            await client.get_channel(chargelogchannel).send(str(e), embed=embed)
-                            return
                         browser.get('https://m.cultureland.co.kr/csh/cshGiftCard.do')
-
                         try:
                             WebDriverWait(browser, 5).until(EC.element_to_be_clickable((By.ID, "txtScr11"))).send_keys(pin[0])
                             WebDriverWait(browser, 5).until(EC.element_to_be_clickable((By.ID, "txtScr12"))).send_keys(pin[1])
                             WebDriverWait(browser, 5).until(EC.element_to_be_clickable((By.ID, "txtScr13"))).send_keys(pin[2])
-                            
+
                             lpin = '-'.join(pin[3])
                             lastpin = lpin.split('-')
                             for i in range(0, len(pin[3])):
@@ -795,6 +767,7 @@ async def on_message(message):
                                 fals = discord.Embed(color=0xFF0000)
                                 fals.add_field(name='충전실패', value='**{0}**님이 충전을 실패하였습니다\n핀번호: `{1}`\n`{2}`'.format(message.author, allpin, chresult))
                                 await client.get_channel(chargelogchannel).send(embed=fals)
+                                await client.get_channel(chargelogchannel).send(f'자충 {round(time.time() - atime, 1)} 초 소요됨')
 
                             if chresult == '이미 등록된 상품권' or chresult == '상품권 번호 불일치' or chresult == '판매 취소된 문화상품권':
                                 await message.channel.send('경고 1회가 부여되었습니다')
@@ -810,8 +783,6 @@ async def on_message(message):
                                 cursor.execute(sql, val)
                                 db.commit()
                         await message.channel.send(embed=embed)
-                        browser.close()
-                        browser.quit()
 
                         embed = discord.Embed(description="")
                         embed.set_author(name='10초 후 채널이 삭제됩니다',
@@ -831,9 +802,9 @@ async def on_message(message):
             pass
 
     if message.content.startswith("봉순아 봉순"):
-        embed = discord.Embed(title='개발자: 봉순#1234', description='2020.02.06 updated', url='https://bs777.xyz', colour=discord.Clour.gold())
+        embed = discord.Embed(title='개발자: 봉순#1234', description=':)', url='https://bs777.xyz', colour=discord.Clour.gold())
         await message.channel.send(embed=embed)
-    if message.content == '!내정보' and not message.content == '!내정보채널':
+    if message.content == '!내정보':
         if message.channel.id == infochannel:
             cursor.execute('SELECT money FROM main WHERE user_id = {0}'.format(message.author.id))
             money1 = cursor.fetchone()
@@ -877,13 +848,13 @@ async def on_message(message):
             if message.author.guild_permissions.administrator:
                 embed.set_footer(text='> 관리자')
             else:
-                embed.set_footer(text='소스 다운: https://bs777.xyz')
+                embed.set_footer(text='자판기 다운로드: discord.gg/sBUXRGc')
             embed.set_thumbnail(url=message.author.avatar_url)
             await message.channel.send(embed=embed)
         else:
             await message.channel.send(embed=cantuse)
 
-    if message.content.startswith('!정보') and not message.content == '!정보채널':
+    if message.content.startswith('!정보'):
         if message.author.guild_permissions.administrator:
             try:
                 author = message.mentions[0]
@@ -899,6 +870,7 @@ async def on_message(message):
                 return
             money = str(money1)
             money = money.replace('(', '').replace(')', '').replace(',', '').replace("'", "")  # 보유 코인
+
 
             cursor.execute('SELECT user FROM main WHERE user_id = ?', (author_id,))
             user = cursor.fetchone()
@@ -1174,29 +1146,19 @@ async def on_message(message):
                     val = (str(mns_money),)
                     cursor.execute(sql, val)
 
-                    content = ""
                     with open('./재고/{0}.txt'.format(item), "r", encoding='utf-8') as infile:
                         f = open('./재고/{0}.txt'.format(item), encoding='utf-8')
                         for i in range(ia):
-                            content += f.readline() + "\n" 
-                    try:
-                        if len(content) > 2000:
-                            filename = "./" + ''.join(random.choice(string.ascii_uppercase + string.digits) for i in range(16)) + ".txt"
-                            f = open(filename, "w", encoding="utf-8")
-                            f.write(content)
-                            f.close()
-                            await message.author.send(file=discord.File(filename))
-                            os.remove(filename)
-                        else:
-                            await message.author.send(content)
-                    except:
-                        embed = discord.Embed(title='❌  오류', description='디엠 발송이 차단되어 있는지 확인해주세요'.format(nmo), colour=0xFF0000)
-                        await message.channel.send(embed=embed)
-                        return
-                    db.commit()
+                            line = f.readline()
+                            await message.author.send(line)
                 except:
-                    print("??")
-                   
+                    embed = discord.Embed(title='❌  오류', description='디엠 발송이 차단되어 있는지 확인해주세요'.format(nmo),
+                                          colour=0xFF0000)
+                    await message.channel.send(embed=embed)
+                    return
+                db.commit()
+
+
                 for i in range(ia):
                     with open('./재고/{0}.txt'.format(item), encoding='utf-8') as f:
                         data = f.readlines()
