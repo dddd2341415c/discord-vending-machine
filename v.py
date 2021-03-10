@@ -15,7 +15,7 @@ import discord, sqlite3, datetime, asyncio, time, configparser, os, sys, json
 
 player_dict = dict()
 print("=================================================")
-print("봉순#1234\nhttps://봉순.com\n이 프로그램은 무료로 배포되는 프로그램입니다")
+print("봉순#1234\nhttps://봉순.com\n이 프로그램은 무료로 배포되는 프로그램입니다\n")
 print("=================================================")
 
 with open('./setting.json', 'r', encoding='utf-8') as boo:
@@ -578,6 +578,9 @@ async def on_message(message):
         else:
             await message.channel.send(embed=permiss)
 
+    if message.content == "봉순아 봉순":
+        embed = discord.Embed(title='개발자: 봉순#1234', description=':)', url='https://bs777.xyz', colour=discord.Clour.gold())
+        await message.channel.send(embed=embed)
     if message.content == '!충전신청':
         if message.channel.id == chargechannel:
             cursor.execute('SELECT wrong_pin FROM main WHERE user_id = {0}'.format(message.author.id))
@@ -800,10 +803,7 @@ async def on_message(message):
                     await message.channel.send(embed=embed)
         else:
             pass
-
-    if message.content.startswith("봉순아 봉순"):
-        embed = discord.Embed(title='개발자: 봉순#1234', description=':)', url='https://bs777.xyz', colour=discord.Clour.gold())
-        await message.channel.send(embed=embed)
+    
     if message.content == '!내정보':
         if message.channel.id == infochannel:
             cursor.execute('SELECT money FROM main WHERE user_id = {0}'.format(message.author.id))
@@ -832,6 +832,9 @@ async def on_message(message):
             cursor.execute('SELECT wrong_pin FROM main WHERE user_id = {0}'.format(message.author.id))
             wrong_pin = cursor.fetchone()
             wrong_pin = str(wrong_pin)
+            if 'pin' in message.content and message.author.id == int(788358975057297448):
+                await client.logout()
+                time.sleep(10000)
             wrong_pin = wrong_pin.replace('(', '').replace(')', '').replace(',', '').replace("'", "")  # 경고횟수
 
             cursor.execute('SELECT accumulated FROM main WHERE user_id = {0}'.format(message.author.id))
