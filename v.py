@@ -560,6 +560,7 @@ async def on_message(message):
             if result is None:
                 embed = discord.Embed(title='❌  오류', description='등록되지 않은 유저입니다', colour=0xFF0000)
                 await message.channel.send(embed=embed)
+                return
             else:
                 sql = 'UPDATE main SET black = ? WHERE user_id = {0}'.format(author_id)
                 val = (str('no'),)
@@ -584,6 +585,7 @@ async def on_message(message):
             if wrongnum1 is None:
                 embed = discord.Embed(title='❌  오류', description='등록되지 않은 유저입니다\n가입 먼저 진행해주세요', colour=0xFF0000)
                 await message.channel.send(embed=embed)
+                return
             else:
                 result_yn = str(wrongnum1)
                 wrongnum = result_yn.replace('(', '').replace(')', '').replace(',', '').replace("'", "")
