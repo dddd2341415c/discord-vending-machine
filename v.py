@@ -54,7 +54,7 @@ permiss = discord.Embed(color=0xFF0000)
 permiss.add_field(name='❌  권한 부족', value='명령어 사용권한이 부족합니다')
 
 #####################################################################
-print("컬쳐랜드에 로그인중입니다. 잠시만 기다려주세요.")
+print("[!] 컬쳐랜드에 로그인중입니다. 잠시만 기다려주세요.")
 options = ChromeOptions()
 options.add_argument('headless')
 options.add_argument("disable-gpu")
@@ -207,7 +207,7 @@ async def on_connect():
                 )
             ''')
     change_message.start()
-    print("{0}(으)로 접속됨".format(client.user.name))
+    print("[+] {0}(으)로 접속됨".format(client.user.name))
 
 
 def is_not_pinned(mess):
