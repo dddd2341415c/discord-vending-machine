@@ -1156,7 +1156,7 @@ async def on_message(message):
                             line = f.readline()
                             await message.author.send(line)
                 except:
-                    embed = discord.Embed(title='❌  오류', description='디엠 발송이 차단되어 있는지 확인해주세요'.format(nmo),
+                    embed = discord.Embed(title='❌  오류', description='디엠 발송이 차단되어 있는지 확인해주세요',
                                           colour=0xFF0000)
                     await message.channel.send(embed=embed)
                     return
