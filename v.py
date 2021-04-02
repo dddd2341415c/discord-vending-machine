@@ -1142,13 +1142,14 @@ async def on_message(message):
                     return
                 
                 itemtxt.close()
+
+                mns_money = int(lmoney) - int(lselitem_price)
+                sql = 'UPDATE main SET money = ? WHERE user_id = {0}'.format(message.author.id)
+                val = (str(mns_money),)
+                cursor.execute(sql, val)
+                db.commit()
                 
                 try:
-                    mns_money = int(lmoney) - int(lselitem_price)
-                    sql = 'UPDATE main SET money = ? WHERE user_id = {0}'.format(message.author.id)
-                    val = (str(mns_money),)
-                    cursor.execute(sql, val)
-
                     with open('./재고/{0}.txt'.format(item), "r", encoding='utf-8') as infile:
                         f = open('./재고/{0}.txt'.format(item), encoding='utf-8')
                         for i in range(ia):
@@ -1159,8 +1160,6 @@ async def on_message(message):
                                           colour=0xFF0000)
                     await message.channel.send(embed=embed)
                     return
-                db.commit()
-
 
                 for i in range(ia):
                     with open('./재고/{0}.txt'.format(item), encoding='utf-8') as f:
