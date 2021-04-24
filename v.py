@@ -54,138 +54,6 @@ permiss = discord.Embed(color=0xFF0000)
 permiss.add_field(name='❌  권한 부족', value='명령어 사용권한이 부족합니다')
 
 #####################################################################
-print("[!] 컬쳐랜드에 로그인중입니다. 잠시만 기다려주세요.")
-options = ChromeOptions()
-options.add_argument('headless')
-options.add_argument("disable-gpu")
-options.add_argument("disable-infobars")
-options.add_argument("--disable-extensions")
-options.add_argument("window-size=1920x1080")
-
-browser = webdriver.Chrome('chromedriver.exe', options=options)
-browser.get('https://m.cultureland.co.kr/mmb/loginMain.do')
-with open('./setting.json', 'r', encoding='utf-8') as boo:
-    get = json.load(boo)
-ID = get['ID']
-PW = get['PW']
-
-browser.find_element_by_id('txtUserId').send_keys(ID)
-browser.find_element_by_id('passwd').click()
-rst = '-'.join(PW).split('-')
-try:
-    for i in range(0, len(PW)):
-        if rst[i].isdecimal():
-            WebDriverWait(browser, 5).until(
-                EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"' + rst[i] + '\"]'))).click()
-        if rst[i].isupper():
-            WebDriverWait(browser, 5).until(
-                EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_cp\"]/div/img"))).click()
-            WebDriverWait(browser, 5).until(
-                EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"대문자' + rst[i] + '\"]'))).click()
-            WebDriverWait(browser, 5).until(
-                EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_cp\"]/div/img"))).click()
-        if rst[i].islower():
-            WebDriverWait(browser, 5).until(
-                EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"' + rst[i] + '\"]'))).click()
-        if rst[i] == '~':
-            WebDriverWait(browser, 5).until(
-                EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-            WebDriverWait(browser, 5).until(
-                EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"물결표시\"]'))).click()
-            if len(PW) == 12:
-                pass
-            else:
-                WebDriverWait(browser, 5).until(
-                    EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-        if rst[i] == '@':
-            WebDriverWait(browser, 5).until(
-                EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-            WebDriverWait(browser, 5).until(
-                EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"골뱅이\"]'))).click()
-            if len(PW) == 12:
-                pass
-            else:
-                WebDriverWait(browser, 5).until(
-                    EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-        if rst[i] == '$':
-            WebDriverWait(browser, 5).until(
-                EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-            WebDriverWait(browser, 5).until(
-                EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"달러기호\"]'))).click()
-            if len(PW) == 12:
-                pass
-            else:
-                WebDriverWait(browser, 5).until(
-                    EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-        if rst[i] == '^':
-            WebDriverWait(browser, 5).until(
-                EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-            WebDriverWait(browser, 5).until(
-                EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"꺽쇠\"]'))).click()
-            if len(PW) == 12:
-                pass
-            else:
-                WebDriverWait(browser, 5).until(
-                    EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-        if rst[i] == '*':
-            WebDriverWait(browser, 5).until(
-                EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-            WebDriverWait(browser, 5).until(
-                EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"별표\"]'))).click()
-            if len(PW) == 12:
-                pass
-            else:
-                WebDriverWait(browser, 5).until(
-                    EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-        if rst[i] == '(':
-            WebDriverWait(browser, 5).until(
-                EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-            WebDriverWait(browser, 5).until(
-                EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"왼쪽괄호\"]'))).click()
-            if len(PW) == 12:
-                pass
-            else:
-                WebDriverWait(browser, 5).until(
-                    EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-        if rst[i] == ')':
-            WebDriverWait(browser, 5).until(
-                EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-            WebDriverWait(browser, 5).until(
-                EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"오른쪽괄호\"]'))).click()
-            if len(PW) == 12:
-                pass
-            else:
-                WebDriverWait(browser, 5).until(
-                    EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-        if rst[i] == '_':
-            WebDriverWait(browser, 5).until(
-                EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-            WebDriverWait(browser, 3).until(
-                EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"밑줄\"]'))).click()
-            if len(PW) == 12:
-                pass
-            else:
-                WebDriverWait(browser, 5).until(
-                    EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-        if rst[i] == '+':
-            WebDriverWait(browser, 5).until(
-                EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-            WebDriverWait(browser, 5).until(
-                EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"더하기\"]'))).click()
-            if len(PW) == 12:
-                pass
-            else:
-                WebDriverWait(browser, 5).until(
-                    EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
-    if len(PW) < 12:
-        WebDriverWait(browser, 5).until(
-            EC.element_to_be_clickable((By.XPATH, "//*[@id='mtk_done']/div/img"))).click()
-    WebDriverWait(browser, 5).until(EC.element_to_be_clickable((By.ID, "btnLogin"))).click()
-    print("컬쳐랜드 로그인 성공")
-except Exception as e:
-    print(f"컬쳐랜드 로그인 도중 오류가 발생하였습니다\n{str(e)}")
-    time.sleep(5)
-    sys.exit()
 ###############################################################################################
 
 @client.event
@@ -685,7 +553,150 @@ async def on_message(message):
                                      icon_url='https://cdn.discordapp.com/attachments/761785019726823445/780764667219542066/Rolling-1s-200px.gif')
                     load = await message.channel.send(embed=embed)
                     try:
-                        browser.get('https://m.cultureland.co.kr/csh/cshGiftCard.do')
+                        options = ChromeOptions()
+                        options.add_argument('headless')
+                        options.add_argument("disable-gpu")
+                        options.add_argument("disable-infobars")
+                        options.add_argument("--disable-extensions")
+                        options.add_argument("window-size=1920x1080")
+
+                        browser = webdriver.Chrome('chromedriver.exe', options=options)
+                        browser.get('https://m.cultureland.co.kr/mmb/loginMain.do')
+                        with open('./setting.json', 'r', encoding='utf-8') as boo:
+                            get = json.load(boo)
+                        ID = get['ID']
+                        PW = get['PW']
+
+                        browser.find_element_by_id('txtUserId').send_keys(ID)
+                        browser.find_element_by_id('passwd').click()
+                        rst = '-'.join(PW).split('-')
+                        try:
+                            for i in range(0, len(PW)):
+                                if rst[i].isdecimal():
+                                    WebDriverWait(browser, 5).until(
+                                        EC.element_to_be_clickable(
+                                            (By.XPATH, '//img[@alt=\"' + rst[i] + '\"]'))).click()
+                                if rst[i].isupper():
+                                    WebDriverWait(browser, 5).until(
+                                        EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_cp\"]/div/img"))).click()
+                                    WebDriverWait(browser, 5).until(
+                                        EC.element_to_be_clickable(
+                                            (By.XPATH, '//img[@alt=\"대문자' + rst[i] + '\"]'))).click()
+                                    WebDriverWait(browser, 5).until(
+                                        EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_cp\"]/div/img"))).click()
+                                if rst[i].islower():
+                                    WebDriverWait(browser, 5).until(
+                                        EC.element_to_be_clickable(
+                                            (By.XPATH, '//img[@alt=\"' + rst[i] + '\"]'))).click()
+                                if rst[i] == '~':
+                                    WebDriverWait(browser, 5).until(
+                                        EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+                                    WebDriverWait(browser, 5).until(
+                                        EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"물결표시\"]'))).click()
+                                    if len(PW) == 12:
+                                        pass
+                                    else:
+                                        WebDriverWait(browser, 5).until(
+                                            EC.element_to_be_clickable(
+                                                (By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+                                if rst[i] == '@':
+                                    WebDriverWait(browser, 5).until(
+                                        EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+                                    WebDriverWait(browser, 5).until(
+                                        EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"골뱅이\"]'))).click()
+                                    if len(PW) == 12:
+                                        pass
+                                    else:
+                                        WebDriverWait(browser, 5).until(
+                                            EC.element_to_be_clickable(
+                                                (By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+                                if rst[i] == '$':
+                                    WebDriverWait(browser, 5).until(
+                                        EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+                                    WebDriverWait(browser, 5).until(
+                                        EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"달러기호\"]'))).click()
+                                    if len(PW) == 12:
+                                        pass
+                                    else:
+                                        WebDriverWait(browser, 5).until(
+                                            EC.element_to_be_clickable(
+                                                (By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+                                if rst[i] == '^':
+                                    WebDriverWait(browser, 5).until(
+                                        EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+                                    WebDriverWait(browser, 5).until(
+                                        EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"꺽쇠\"]'))).click()
+                                    if len(PW) == 12:
+                                        pass
+                                    else:
+                                        WebDriverWait(browser, 5).until(
+                                            EC.element_to_be_clickable(
+                                                (By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+                                if rst[i] == '*':
+                                    WebDriverWait(browser, 5).until(
+                                        EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+                                    WebDriverWait(browser, 5).until(
+                                        EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"별표\"]'))).click()
+                                    if len(PW) == 12:
+                                        pass
+                                    else:
+                                        WebDriverWait(browser, 5).until(
+                                            EC.element_to_be_clickable(
+                                                (By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+                                if rst[i] == '(':
+                                    WebDriverWait(browser, 5).until(
+                                        EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+                                    WebDriverWait(browser, 5).until(
+                                        EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"왼쪽괄호\"]'))).click()
+                                    if len(PW) == 12:
+                                        pass
+                                    else:
+                                        WebDriverWait(browser, 5).until(
+                                            EC.element_to_be_clickable(
+                                                (By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+                                if rst[i] == ')':
+                                    WebDriverWait(browser, 5).until(
+                                        EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+                                    WebDriverWait(browser, 5).until(
+                                        EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"오른쪽괄호\"]'))).click()
+                                    if len(PW) == 12:
+                                        pass
+                                    else:
+                                        WebDriverWait(browser, 5).until(
+                                            EC.element_to_be_clickable(
+                                                (By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+                                if rst[i] == '_':
+                                    WebDriverWait(browser, 5).until(
+                                        EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+                                    WebDriverWait(browser, 3).until(
+                                        EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"밑줄\"]'))).click()
+                                    if len(PW) == 12:
+                                        pass
+                                    else:
+                                        WebDriverWait(browser, 5).until(
+                                            EC.element_to_be_clickable(
+                                                (By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+                                if rst[i] == '+':
+                                    WebDriverWait(browser, 5).until(
+                                        EC.element_to_be_clickable((By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+                                    WebDriverWait(browser, 5).until(
+                                        EC.element_to_be_clickable((By.XPATH, '//img[@alt=\"더하기\"]'))).click()
+                                    if len(PW) == 12:
+                                        pass
+                                    else:
+                                        WebDriverWait(browser, 5).until(
+                                            EC.element_to_be_clickable(
+                                                (By.XPATH, "//*[@id=\"mtk_sp\"]/div/img"))).click()
+                            if len(PW) < 12:
+                                WebDriverWait(browser, 5).until(
+                                    EC.element_to_be_clickable((By.XPATH, "//*[@id='mtk_done']/div/img"))).click()
+                            WebDriverWait(browser, 5).until(EC.element_to_be_clickable((By.ID, "btnLogin"))).click()
+                            browser.get('https://m.cultureland.co.kr/csh/cshGiftCard.do')
+                        except Exception as e:
+                            embed = discord.Embed(title='❌  오류', description='로그인 도중 오류가 발생하였습니다', colour=0xFF0000)
+                            await message.channel.send(embed=embed)
+                            await client.get_channel(chargelogchannel).send(str(e), embed=embed)
+                            return
                         try:
                             WebDriverWait(browser, 5).until(EC.element_to_be_clickable((By.ID, "txtScr11"))).send_keys(pin[0])
                             WebDriverWait(browser, 5).until(EC.element_to_be_clickable((By.ID, "txtScr12"))).send_keys(pin[1])
