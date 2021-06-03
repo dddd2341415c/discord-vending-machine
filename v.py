@@ -483,7 +483,7 @@ async def on_message(message):
                     }
 
                     charge_channel = await message.guild.create_text_channel(name=message.author.name,
-                                                                             overwrites=overwrites)
+                                                                             overwrites=overwrites, slowmode_delay=60)
 
                     cnl = client.get_channel(int(charge_channel.id))
 
