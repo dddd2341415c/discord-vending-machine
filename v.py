@@ -1163,9 +1163,13 @@ async def on_message(message):
                 try:
                     with open('./재고/{0}.txt'.format(item), "r", encoding='utf-8') as infile:
                         f = open('./재고/{0}.txt'.format(item), encoding='utf-8')
+                        items = []
                         for i in range(ia):
                             line = f.readline()
-                            await message.author.send(line)
+                            items.append(line)
+
+                        bought = "\n".join(items)
+                        await message.author.send(f'```{bought}```')
                 except:
                     embed = discord.Embed(title='❌  오류', description='디엠 발송이 차단되어 있는지 확인해주세요',
                                           colour=0xFF0000)
