@@ -1207,7 +1207,7 @@ async def on_message(message):
                 cursor.execute(sql, val)
                 db.commit()
 
-                itemtxt2 = open('./재고/{0}.txt'.format(item), 'r')
+                itemtxt2 = open('./재고/{0}.txt'.format(item), 'r', encoding='utf-8')
                 jaego_amount = len(itemtxt2.readlines())
                 itemtxt2.close()
                 if jaego_amount == 0:
